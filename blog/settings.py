@@ -24,7 +24,7 @@ SECRET_KEY = 'j*c*4y(vv0wjeqf)+&23dw&^s5e=)zy5#1wa=%6ve7%4+0j@dm'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.lxp.pub']
 
