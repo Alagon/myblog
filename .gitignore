@@ -4,3 +4,4 @@ myblog/migrations/*.py
 reload
 static/
 uwsgi.ini
+fabfile.py
