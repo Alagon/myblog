@@ -64,7 +64,7 @@ class ArchivesView(IndexView):
 class PostDetailView(DetailView):
     model = Post
     template_name = 'myblog/detail.html'
-    context_object_name = 'post_list'
+    context_object_name = 'post'
 
     def get(self, request, *args, **kwargs):
         response = super(PostDetailView, self).get(request, *args, **kwargs)
@@ -91,5 +91,3 @@ class PostDetailView(DetailView):
             'comment_list': comment_list
             })
         return context
-
-
