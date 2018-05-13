@@ -8,11 +8,14 @@ import markdown
 from .models import Post, Category
 from comments.forms import CommentForm
 
-def index(request):
-    post_list = Post.objects.all()
-    return render(request, 'myblog/index.html', context = {
-        'post_list': post_list,
-        })
+# for class view import
+from django.views.generic import ListView
+
+# def index(request):
+    # post_list = Post.objects.all()
+    # return render(request, 'myblog/index.html', context = {
+        # 'post_list': post_list,
+        # })
 
 def detail(request, pk):
     post = get_object_or_404(Post, pk = pk)
@@ -42,3 +45,9 @@ def category(request, pk):
     cate = get_object_or_404(Category, pk = pk)
     post_list = Post.objects.filter(category=cate)
     return render(request, 'myblog/index.html', context = {'post_list': post_list})
+
+class IndexView(ListView):
+    model = Post
+    template_name = 'myblog/index.html'
+    context_object_name = 'post_list'
+
