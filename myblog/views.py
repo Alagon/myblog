@@ -50,6 +50,7 @@ class IndexView(ListView):
     model = Post
     template_name = 'myblog/index.html'
     context_object_name = 'post_list'
+    paginate_by = 5
 
 class CategoryView(IndexView):
     def get_queryset(self):
