@@ -47,6 +47,7 @@ class Post(models.Model):
             md = markdown.Markdown(extensions=[
                 'markdown.extensions.extra',
                 'markdown.extensions.codehilite',
+                'markdown.extensions.toc',
                 ])
 
             self.excerpt = strip_tags(md.convert(self.body))[:54]
