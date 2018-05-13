@@ -30,7 +30,7 @@ class Post(models.Model):
     category = models.ForeignKey(Category)
     tags = models.ManyToManyField(Tag, blank=True)
     author = models.ForeignKey(User)
-    views = models.PositiveIntegerField(default=0)
+    views = models.PositiveIntegerField(default=0, editable=False)
 
     def __unicode__(self):
         return self.title
