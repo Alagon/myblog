@@ -3,11 +3,16 @@
 {% load blog_tags %}
 <html>
 <head>
-    <title>豁然之境</title>
+    {% block title %}
+    {% endblock %}
 
     <!-- meta -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- img -->
+    <link rel="icon" href="{% static 'myblog/img/logo.png' %}" type="image/x-icon">
+    <link rel="shortcut icon" href="{% static 'myblog/img/logo.png' %}" type="image/x-icon">
 
     <!-- css -->
     <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">

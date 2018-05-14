@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% load highlight %}
 
+ {% block title %}
+    <title>豁然之境</title>
+{% endblock %}
 {% block main %}
     {% if query %}
         {% for result in page.object_list %}
