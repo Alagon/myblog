@@ -15,9 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from myblog.feeds import AllPostRssFeed
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'', include('myblog.urls')),
     url(r'', include('comments.urls')),
+    url(r'^all/rss/', AllPostRssFeed(), name = 'rss'),
 ]
