@@ -3,5 +3,6 @@ db.sqlite3
 myblog/migrations/*.py
 reload
 static/
+whoosh_index/
 uwsgi.ini
 fabfile.py

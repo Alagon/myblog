@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     'myblog',
     'comments',
+    'haystack',
 ]
 
 MIDDLEWARE = [
@@ -123,3 +124,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+HAYSTACK_CONNECTIONS = {
+        'default':{
+            'ENGINE': 'myblog.whoosh_cn_backends.WhooshEngine',
+            'PATH': os.path.join(BASE_DIR, 'whoosh_index'),
+            },
+        }
+HAYSTACK_SEARCH_RESULTS_PER_PAGE = 10
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
