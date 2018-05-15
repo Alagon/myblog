@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 
 # Create your views here.
 import markdown
@@ -10,8 +10,10 @@ from comments.forms import CommentForm
 
 # for class view import
 from django.views.generic import ListView, DetailView
+from django.views.generic.edit import FormView
 from django.utils.text import slugify
 from markdown.extensions.toc import TocExtension
+from .forms import PostPublishForm
 
 # def index(request):
     # post_list = Post.objects.all()
@@ -160,3 +162,30 @@ class PostDetailView(DetailView):
             'comment_list': comment_list
             })
         return context
+
+def post_publish(request):
+    if request.method == "POST":
+        form = PostPublishForm(request.POST)
+        
+        if form.is_valid():
+            post = form.save()
+            return redirect(post)
+    else:
+        form = PostPublishForm()
+    return render(request, 'myblog/post_publish.html', context = {'form': form})
+
+
+    return render(request, 'myblog/post_publish.html', context = {'form': form})
+
+class PostPublishView(FormView):
+    model = Post
+    template_name = 'myblog/post_publish.html'
+    context_object_name = 'post'
+
+    def form_valid(self, form):
+        return super(PostPublishView, self).form_valid(form)
+
+    def get_success_url(self):
+        post_pk = get_object_or_404(Post, title = self.request.POST.get('title')).pk
+        success_url = reverse('myblog:detail', kwargs={'pk': post_pk})
+        return success_url

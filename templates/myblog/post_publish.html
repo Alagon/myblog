@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title>豁然之境</title>
+{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="//cdn.jsdelivr.net/editor/0.1.0/editor.css">
+<script src="//cdn.jsdelivr.net/editor/0.1.0/editor.js"></script>
+<script src="//cdn.jsdelivr.net/editor/0.1.0/marked.js"></script>
+{% endblock %}
+
+{% block main %}
+      <form action="{% url 'myblog:post_publish' %}" method="post">{% csrf_token %}
+            {{ form.title }}
+            {{ form.body }}
+            {{ form.tags }}
+            {{ form.category }}
+            {{ form.excerpt }}
+            {{ form.author }}
+      <button type="submit" class="comment-btn">发 布</button>
+    </form>
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+  var editor = new Editor();
+  editor.render();
+</script>
+{% endblock %}

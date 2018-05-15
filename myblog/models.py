@@ -23,7 +23,7 @@ class Tag(models.Model):
 
 class Post(models.Model):
     title = models.CharField(max_length=70)
-    body = models.TextField()
+    body = models.TextField(blank=True)
     created_time = models.DateTimeField(auto_now_add=True, editable=False)
     modified_time = models.DateTimeField(auto_now_add=True, editable=False)
     excerpt = models.CharField(max_length=200, blank=True)

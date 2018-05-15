@@ -26,6 +26,9 @@
     <script src="{% static 'myblog/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'myblog/js/pace.min.js' %}"></script>
     <script src="{% static 'myblog/js/modernizr.custom.js' %}"></script>
+    {% block extra_head %}
+    {% endblock %}
+
     <style>
         span.highlighted {
             color: red;
@@ -171,6 +174,8 @@
 </div>
 
 <script src="{% static 'myblog/js/script.js' %}"></script>
+{% block scripts %}
+{% endblock %}
 
 </body>
 </html>
