@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.conf import settings
 
 # Create your models here.
 import markdown
@@ -29,7 +30,7 @@ class Post(models.Model):
     excerpt = models.CharField(max_length=200, blank=True)
     category = models.ForeignKey(Category)
     tags = models.ManyToManyField(Tag, blank=True)
-    author = models.ForeignKey(User)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL)
     views = models.PositiveIntegerField(default=0, editable=False)
 
     def __unicode__(self):
