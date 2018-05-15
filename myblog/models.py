@@ -6,7 +6,7 @@ from django.conf import settings
 
 # Create your models here.
 import markdown
-from django.contrib.auth.models import User
+from users.models import User
 from django.urls import reverse
 from django.utils.html import strip_tags
 
@@ -30,7 +30,7 @@ class Post(models.Model):
     excerpt = models.CharField(max_length=200, blank=True)
     category = models.ForeignKey(Category)
     tags = models.ManyToManyField(Tag, blank=True)
-    author = models.ForeignKey(settings.AUTH_USER_MODEL)
+    author = models.ForeignKey(User)
     views = models.PositiveIntegerField(default=0, editable=False)
 
     def __unicode__(self):

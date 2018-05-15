@@ -172,10 +172,25 @@ def post_publish(request):
             return redirect(post)
     else:
         form = PostPublishForm()
-    return render(request, 'myblog/post_publish.html', context = {'form': form})
+        return render(request, 'myblog/post_publish.html', context = {'form': form})
 
+def post_edit(request, pk):
+    post = get_object_or_404(Post, pk = pk)
+    if request.method == "POST":
+        form = PostPublishForm(request.POST)
+        
+        if form.is_valid():
+            post.title = form.cleaned_data['title']
+            post.body = form.cleaned_data['body']
+            post.tags = form.cleaned_data['tags']
+            post.excerpt = form.cleaned_data['excerpt']
+            post.category = form.cleaned_data['category']
+            post.save()
+            return redirect(post)
+    else:
+        form = PostPublishForm(instance = post)
+        return render(request, 'myblog/post_publish.html', context = {'form': form})
 
-    return render(request, 'myblog/post_publish.html', context = {'form': form})
 
 class PostPublishView(FormView):
     model = Post

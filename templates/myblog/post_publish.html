@@ -10,15 +10,53 @@
 {% endblock %}
 
 {% block main %}
-      <form action="{% url 'myblog:post_publish' %}" method="post">{% csrf_token %}
-            {{ form.title }}
-            {{ form.body }}
-            {{ form.tags }}
-            {{ form.category }}
-            {{ form.excerpt }}
-            {{ form.author }}
-      <button type="submit" class="comment-btn">发 布</button>
-    </form>
+<div class="publish center-block">
+    <form class=form action="{% url 'myblog:post_publish' %}" method="post">{% csrf_token %}
+        <div class="row">
+            <div class="col-md-4">
+                <label for="{{ form.title.id_for_label }}">标题：</label>
+                {{ form.title }}
+                {{ form.title.errors }}
+                {% if form.title.help_text %}
+                    <p class="help text-small text-muted">{{ form.title.help_text|safe }}</p>
+                {% endif %}
+            </div>
+            <div class="col-md-24">
+                <label for="{{ form.body.id_for_label }}">正文：</label>
+                {{ form.body }}
+                {{ form.body.errors }}
+                {% if form.body.help_text %}
+                    <p class="help text-small text-muted">{{ form.body.help_text|safe }}</p>
+                {% endif %}
+            </div>
+            <div class="col-md-4">
+                <label for="{{ form.tags.id_for_label }}">标签：</label>
+                {{ form.tags }}
+                {{ form.tags.errors }}
+                {% if form.tags.help_text %}
+                    <p class="help text-small text-muted">{{ form.tags.help_text|safe }}</p>
+                {% endif %}
+            </div>
+            <div class="col-md-4">
+                <label for="{{ form.category.id_for_label }}">分类：</label>
+                {{ form.category }}
+                {{ form.category.errors }}
+                {% if form.category.help_text %}
+                    <p class="help text-small text-muted">{{ form.category.help_text|safe }}</p>
+                {% endif %}
+            </div>
+            <div class="col-md-4">
+                <label for="{{ form.excerpt.id_for_label }}">摘要：</label>
+                {{ form.excerpt }}
+                {{ form.excerpt.errors }}
+                {% if form.excerpt.help_text %}
+                    <p class="help text-small text-muted">{{ form.excerpt.help_text|safe }}</p>
+                {% endif %}
+            </div>
+      <button type="submit" class="btn btn-primary">发 布</button>
+        </div>
+        </form>
+</div>
 {% endblock %}
 
 {% block scripts %}

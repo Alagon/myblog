@@ -9,4 +9,5 @@ urlpatterns = [
         url(r'^category/(?P<pk>[0-9]+)/$', views.CategoryView.as_view(), name = 'category'),
         url(r'^tag/(?P<pk>[0-9]+)/$', views.TagView.as_view(), name = 'tag'),
         url(r'^post/publish$', views.post_publish, name = 'post_publish'),
+        url(r'^post/edit/(?P<pk>[0-9]+)$', views.post_edit, name = 'post_edit'),
         ]
