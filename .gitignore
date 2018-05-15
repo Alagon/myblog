@@ -1,7 +1,6 @@
 *.pyc
 db.sqlite3
 migrations/*.py
-migrations/*.py
 reload
 static/
 whoosh_index/
