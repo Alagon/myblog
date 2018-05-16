@@ -26,11 +26,11 @@
             </ul>
         </div>
     </div>
-</article>
 {% if user.is_staff %}
     <button class="btn btn-primary"><a href="{% url 'myblog:post_edit' post.pk %}?next={{ request.path }}">编辑文档</a></button>
     <input type="hidden" name="next" value="{{ next }}"/>
 {% endif %}
+</article>
 <section class="comment-area" id="comment-area">
     <hr>
     <h3>发表评论</h3>
