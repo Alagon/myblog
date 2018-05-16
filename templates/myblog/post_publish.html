@@ -11,7 +11,8 @@
 
 {% block main %}
 <div class="publish center-block">
-    <form class=form action="{% url 'myblog:post_publish' %}" method="post">{% csrf_token %}
+    <!--<form class=form action="{% url 'myblog:post_publish' %}" method="post">{% csrf_token %}-->
+    <form class=form action="" method="post">{% csrf_token %}
         <div class="row">
             <div class="col-md-4">
                 <label for="{{ form.title.id_for_label }}">标题：</label>

@@ -15,6 +15,8 @@ from django.utils.text import slugify
 from markdown.extensions.toc import TocExtension
 from .forms import PostPublishForm
 from django.contrib.admin.views.decorators import staff_member_required
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
 
 class AdminRequiredMixin(object):
     @classmethod
@@ -181,20 +183,20 @@ class PostDetailView(DetailView):
         # form = PostPublishForm()
         # return render(request, 'myblog/post_publish.html', context = {'form': form})
 
-class PostPublishView(AdminRequiredMixin, FormView):
-    template_name = 'myblog/post_publish.html'
-    form_class = PostPublishForm
+# class PostPublishView(AdminRequiredMixin, FormView):
+    # template_name = 'myblog/post_publish.html'
+    # form_class = PostPublishForm
         
-    def get(self, request, *args, **kwargs):
-        form = self.form_class()
-        return render(request, self.template_name, {'form': form})
+    # def get(self, request, *args, **kwargs):
+        # form = self.form_class()
+        # return render(request, self.template_name, {'form': form})
 
-    def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            post = form.save()
-            return redirect(post)
-        return render(request, self.template_name, {'form': form})
+    # def post(self, request, *args, **kwargs):
+        # form = self.form_class(request.POST)
+        # if form.is_valid():
+            # post = form.save()
+            # return redirect(post)
+#         return render(request, self.template_name, {'form': form})
 
 # def post_edit(request, pk):
     # post = get_object_or_404(Post, pk = pk)
@@ -213,28 +215,51 @@ class PostPublishView(AdminRequiredMixin, FormView):
         # form = PostPublishForm(instance = post)
 #         return render(request, 'myblog/post_publish.html', context = {'form': form})
 
-class PostEditView(AdminRequiredMixin, FormView):
+class PostEditView(AdminRequiredMixin, UpdateView):
+    model = Post
     template_name = 'myblog/post_publish.html'
-    form_class = PostPublishForm
+    fields = ['title', 'body', 'tags', 'category', 'excerpt']
 
-    def get(self, request, *args, **kwargs):
-        post = get_object_or_404(Post, pk = self.kwargs.get('pk'))
-        form = self.form_class(instance = post)
-        return render(request, self.template_name, {'form': form})
+    def form_valid(self, form):
+        clean = form.cleaned_data
+        context = {}
+        self.object = context.update(clean, force_update=True)
+        return super(PostEditView, self).form_valid(form)
+    
+class PostPublishView(AdminRequiredMixin, CreateView):
+    model = Post
+    template_name = 'myblog/post_publish.html'
+    fields = ['title', 'body', 'tags', 'category', 'excerpt']
 
-    def post(self, request, *args, **kwargs):
-        post = get_object_or_404(Post, pk = self.kwargs.get('pk'))
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            post.title = form.cleaned_data['title']
-            post.body = form.cleaned_data['body']
-            post.tags = form.cleaned_data['tags']
-            post.excerpt = form.cleaned_data['excerpt']
-            post.category = form.cleaned_data['category']
-            post = form.save()
-            return redirect(post)
+    def form_valid(self, form):
+        clean = form.cleaned_data
+        form.instance.author=self.request.user
+        context = {}
+        self.object = context.update(clean, force_update=False)
+        return super(PostPublishView, self).form_valid(form)
 
-        return render(request, self.template_name, {'form': form})
+# class PostEditView(AdminRequiredMixin, FormView):
+    # template_name = 'myblog/post_publish.html'
+    # form_class = PostPublishForm
+
+    # def get(self, request, *args, **kwargs):
+        # post = get_object_or_404(Post, pk = self.kwargs.get('pk'))
+        # form = self.form_class(instance = post)
+        # return render(request, self.template_name, {'form': form})
+
+    # def post(self, request, *args, **kwargs):
+        # post = get_object_or_404(Post, pk = self.kwargs.get('pk'))
+        # form = self.form_class(request.POST)
+        # if form.is_valid():
+            # post.title = form.cleaned_data['title']
+            # post.body = form.cleaned_data['body']
+            # post.tags = form.cleaned_data['tags']
+            # post.excerpt = form.cleaned_data['excerpt']
+            # post.category = form.cleaned_data['category']
+            # post = form.save()
+            # return redirect(post)
+
+#         return render(request, self.template_name, {'form': form})
 
 
 # class PostPublishView(FormView):
