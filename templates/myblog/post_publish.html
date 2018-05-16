@@ -13,33 +13,46 @@
 <div class="publish center-block">
     <!--<form class=form action="{% url 'myblog:post_publish' %}" method="post">{% csrf_token %}-->
     <form class=form action="" method="post">{% csrf_token %}
+        <fieldset class="module aligned ">
         <div class="row">
-            <div class="col-md-4">
-                <label for="{{ form.title.id_for_label }}">标题：</label>
-                {{ form.title }}
+            <div class="form-row field-excerpt">
+                <div>
+                    <label for="{{ form.title.id_for_label }}">标题：</label>
+                    {{ form.title }}
+                    {{ form.title.errors }}
+                </div>
             </div>
-            <div class="col-md-24">
-                <label for="{{ form.body.id_for_label }}">正文：</label>
-                {{ form.body }}
+            <div class="form-row field-excerpt">
+                <div>
+                    <label for="{{ form.body.id_for_label }}">正文：</label>
+                    {{ form.body }}
+                    {{ form.body.errors }}
+                </div>
             </div>
-            <div class="col-md-4">
-                <label for="{{ form.tags.id_for_label }}">标签：</label>
-                {{ form.tags }}
+            <div class="form-row field-excerpt">
+                <div>
+                    <label for="{{ form.tags.id_for_label }}">标签：</label>
+                    {{ form.tags }}
+                    {{ form.tags.errors }}
+                </div>
             </div>
-            <div class="col-md-4">
-                <label for="{{ form.category.id_for_label }}">分类：</label>
-                {{ form.category }}
+            <div class="form-row field-excerpt">
+                <div>
+                    <label for="{{ form.category.id_for_label }}">分类：</label>
+                    {{ form.category }}
+                    {{ form.category.errors }}
+                </div>
             </div>
-            <div class="col-md-4">
-                <label for="{{ form.excerpt.id_for_label }}">摘要：</label>
-                {{ form.excerpt }}
-            </div>
-            <div class="col-md-4">
-                <label for="{{ form.excerpt.id_for_label }}">作者：</label>
-                {{ form.author }}
+            <div class="form-row field-excerpt">
+                <div>
+                    <label for="{{ form.excerpt.id_for_label }}">摘要：</label>
+                    {{ form.excerpt }}
+                    {{ form.excerpt.errors }}
+                </div>
             </div>
         </div>
         <button type="submit" class="btn btn-primary">发 布</button>
+        </fieldset>
     </form>
 </div>
 {% endblock %}
