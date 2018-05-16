@@ -142,3 +142,8 @@ AUTH_USER_MODEL = 'users.User'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+GITHUB_AUTHORIZE_URL = 'https://github.com/login/oauth/authorize'
+GITHUB_CLIENTID = 'ab5330794a56cac83136'
+GITHUB_CLIENTSECRET = '5758a0fb8ce15dd4510461cd49ccbc9c47241e18'
+GITHUB_CALLBACK = 'http://www.lxp.pub'

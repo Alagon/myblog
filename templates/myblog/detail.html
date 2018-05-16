@@ -27,8 +27,10 @@
         </div>
     </div>
 </article>
-<button class="btn btn-primary"><a href="{% url 'myblog:post_edit' post.pk %}?next={{ request.path }}">编辑文档</a></button>
-<input type="hidden" name="next" value="{{ next }}"/>
+{% if user.is_staff %}
+    <button class="btn btn-primary"><a href="{% url 'myblog:post_edit' post.pk %}?next={{ request.path }}">编辑文档</a></button>
+    <input type="hidden" name="next" value="{{ next }}"/>
+{% endif %}
 <section class="comment-area" id="comment-area">
     <hr>
     <h3>发表评论</h3>
