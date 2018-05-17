@@ -15,6 +15,8 @@ def post_comment(request, post_pk):
 
         if form.is_valid():
             comment = form.save(commit = False)
+            comment.name = request.user.username
+            comment.email = request.user.email
             comment.post = post
             comment.save()
 

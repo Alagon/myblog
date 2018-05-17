@@ -112,7 +112,9 @@
                     <ul>
                         {% for date in date_list %}
                         <li>
-                            <a href="{% url 'myblog:archives' date.year date.month %}">{{ date.year }} 年 {{ date.month }} 月</a>
+                            <span class="label label-info">
+                                <a href="{% url 'myblog:archives' date.year date.month %}">{{ date.year }} 年 {{ date.month }} 月</a>
+                            </span>
                         </li>
                         {% empty %}
                          暂无归档！
@@ -126,7 +128,9 @@
                     <ul>
                         {% for category in category_list %}
                         <li>
+                            <span class="label label-warning">
                             <a href="{% url 'myblog:category' category.pk %}">{{ category.name }} <span class="post-count">({{ category.num_posts }})</span></a>
+                            </span>
                         </li>
                         {% empty %}
                          暂无分类!
@@ -139,9 +143,11 @@
                     {% get_tags as tag_list %}
                     <ul>
                         {% for tag in tag_list %}
-                        <li>
-                            <a href="{% url 'myblog:tag' tag.pk %}">{{ tag.name }}</a>
-                        </li>
+                            <span class="label label-info">
+                            <span class="label label-info">
+                                <a href="{% url 'myblog:tag' tag.pk %}">{{ tag.name }}</a>
+                            </span>
+                            </span>
                         {% empty %}
                          暂无标签！
                         {% endfor %}
